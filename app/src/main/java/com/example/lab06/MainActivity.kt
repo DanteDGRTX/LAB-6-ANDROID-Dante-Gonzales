@@ -169,9 +169,10 @@ fun CustomScaffold() {
 
 @Composable
 fun CustomFAB() {
+    val bindings = LocalLabScaffoldBindings.current
     FloatingActionButton(
-        // Acción al hacer clic en el botón (sin definir)
-        onClick = { /* TODO */ }
+        // Cada toque incrementa el estado compartido con la pantalla principal.
+        onClick = bindings.onIncrement
     ) {
         Text(
             fontSize = 24.sp,
