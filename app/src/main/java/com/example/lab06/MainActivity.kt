@@ -301,78 +301,65 @@ private fun UserProfileContent(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun CustomContent(padding: PaddingValues) {
+fun CustomContent(padding: PaddingValues) {
     val bindings = LocalLabScaffoldBindings.current
     val section = bindings.section
     val clicks = bindings.clicks
-    if (section == "Perfil") {
-        UserProfileContent(modifier = Modifier.padding(padding))
-        return
-    }
-
-    when (section) {
-        "Personalizar" -> {
-            DestinationScreen(
-                modifier = Modifier.padding(padding),
-                icon = Icons.Filled.Tune,
-                title = "Personalización",
-                description = "Aquí puedes encontrar opciones para personalizar la aplicación."
-            )
-            return
-        }
-        "Explorar" -> {
-            DestinationScreen(
-                modifier = Modifier.padding(padding),
-                icon = Icons.Filled.Explore,
-                title = "Explorar",
-                description = "Esta vista reúne accesos y secciones para explorar."
-            )
-            return
-        }
-        "Favoritos" -> {
-            DestinationScreen(
-                modifier = Modifier.padding(padding),
-                icon = Icons.Filled.Star,
-                title = "Favoritos",
-                description = "Aquí se mostrarán los elementos que marques como favoritos."
-            )
-            return
-        }
-        "Papelera" -> {
-            DestinationScreen(
-                modifier = Modifier.padding(padding),
-                icon = Icons.Filled.DeleteForever,
-                title = "Papelera",
-                description = "Los elementos eliminados aparecerán en esta sección."
-            )
-            return
-        }
-    }
-
     Column(
+        // Modificadores de estilo de la columna
         modifier = Modifier
+            // Ocupar todo el espacio disponible
             .fillMaxSize()
-            .padding(padding)
-            .padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Text("Plantilla básica con Scaffold", style = MaterialTheme.typography.headlineSmall)
-        Text("Explora los elementos principales de una interfaz en Jetpack Compose.")
-        Card(modifier = Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("Sección actual: $section", style = MaterialTheme.typography.titleMedium)
-                Text("El Scaffold organiza las barras y el contenido de la pantalla.")
+            .padding(padding),
+
+        // Contenido de la aplicación
+        content = {
+            when (section) {
+                "Perfil" -> UserProfileContent()
+                "Personalizar" -> DestinationScreen(
+                    icon = Icons.Filled.Tune,
+                    title = "Personalización",
+                    description = "Aquí puedes encontrar opciones para personalizar la aplicación."
+                )
+                "Explorar" -> DestinationScreen(
+                    icon = Icons.Filled.Explore,
+                    title = "Explorar",
+                    description = "Esta vista reúne accesos y secciones para explorar."
+                )
+                "Favoritos" -> DestinationScreen(
+                    icon = Icons.Filled.Star,
+                    title = "Favoritos",
+                    description = "Aquí se mostrarán los elementos que marques como favoritos."
+                )
+                "Papelera" -> DestinationScreen(
+                    icon = Icons.Filled.DeleteForever,
+                    title = "Papelera",
+                    description = "Los elementos eliminados aparecerán en esta sección."
+                )
+                else -> Column(
+                    modifier = Modifier.fillMaxSize().padding(24.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Text("Plantilla básica con Scaffold", style = MaterialTheme.typography.headlineSmall)
+                    Text("Explora los elementos principales de una interfaz en Jetpack Compose.")
+                    Card(modifier = Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("Sección actual: $section", style = MaterialTheme.typography.titleMedium)
+                            Text("El Scaffold organiza las barras y el contenido de la pantalla.")
+                        }
+                    }
+                    Card(modifier = Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("Floating Action Button", style = MaterialTheme.typography.titleMedium)
+                            Text("Has presionado el botón $clicks ${if (clicks == 1) "vez" else "veces"}.")
+                        }
+                    }
+                    Spacer(Modifier.height(4.dp))
+                    Text("Prueba el menú superior, el menú lateral y la navegación inferior.")
+                }
             }
         }
-        Card(modifier = Modifier.fillMaxWidth()) {
-            Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text("Floating Action Button", style = MaterialTheme.typography.titleMedium)
-                Text("Has presionado el botón $clicks ${if (clicks == 1) "vez" else "veces"}.")
-            }
-        }
-        Spacer(Modifier.height(4.dp))
-        Text("Prueba el menú superior, el menú lateral y la navegación inferior.")
-    }
+    )
 }
 
 @Composable
