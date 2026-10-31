@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.DeleteForever
@@ -57,6 +56,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
@@ -169,13 +169,14 @@ fun CustomScaffold() {
 
 @Composable
 fun CustomFAB() {
-    val bindings = LocalLabScaffoldBindings.current
-    FloatingActionButton(onClick = bindings.onIncrement) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Filled.Add, contentDescription = "Incrementar contador")
-            Spacer(Modifier.width(8.dp))
-            Text("Sumar")
-        }
+    FloatingActionButton(
+        // Acción al hacer clic en el botón (sin definir)
+        onClick = { /* TODO */ }
+    ) {
+        Text(
+            fontSize = 24.sp,
+            text = "+"
+        )
     }
 }
 
