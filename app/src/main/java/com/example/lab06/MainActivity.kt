@@ -350,7 +350,10 @@ private fun CustomContent(padding: PaddingValues) {
     }
 
     Column(
-        modifier = Modifier.padding(padding).fillMaxSize().padding(24.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(padding)
+            .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text("Plantilla básica con Scaffold", style = MaterialTheme.typography.headlineSmall)
